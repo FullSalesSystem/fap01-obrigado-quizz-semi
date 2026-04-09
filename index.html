@@ -592,6 +592,10 @@
         <button type="button" class="btn btn--primary btn--hidden" id="btn-confirm">
           Confirmar seleção →
         </button>
+        <!-- shown after step 5 is answered -->
+        <button type="button" class="btn btn--primary btn--hidden" id="btn-submit">
+          Enviar respostas →
+        </button>
       </div>
 
     </div><!-- /quiz-card -->
@@ -612,6 +616,7 @@
       const stepNum       = document.getElementById('step-num');
       const btnBack       = document.getElementById('btn-back');
       const btnConfirm    = document.getElementById('btn-confirm');
+      const btnSubmit     = document.getElementById('btn-submit');
       const quizNav       = document.getElementById('quiz-nav');
       const successScreen = document.getElementById('success-screen');
 
@@ -641,6 +646,8 @@
         btnBack.classList.toggle('btn--hidden', current === 1);
         /* confirm button only visible on step 2 (checkboxes) */
         btnConfirm.classList.toggle('btn--hidden', current !== 2);
+        /* hide submit button whenever navigating */
+        btnSubmit.classList.add('btn--hidden');
       }
 
       /* ── Advance / submit ── */
@@ -656,8 +663,31 @@
 
       /* ── Submit ── */
       function submitQuiz() {
-        window.location.href = 'https://fap01-calendly-semi.fullsalessystem.com/';
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = 'Enviando…';
+
+        var q1 = document.querySelector('input[name="q1"]:checked');
+        var q2 = Array.from(document.querySelectorAll('input[name="q2"]:checked')).map(function (cb) { return cb.value; });
+        var q3 = document.querySelector('input[name="q3"]:checked');
+        var q4 = document.querySelector('input[name="q4"]:checked');
+        var q5 = document.querySelector('input[name="q5"]:checked');
+
+        fetch('https://responsefss.fullsalessystem.com.br/webhook/DESENVRESPS', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            q1: q1 ? q1.value : null,
+            q2: q2,
+            q3: q3 ? q3.value : null,
+            q4: q4 ? q4.value : null,
+            q5: q5 ? q5.value : null
+          })
+        }).finally(function () {
+          window.location.href = 'https://fap01-calendly-semi.fullsalessystem.com/';
+        });
       }
+
+      btnSubmit.addEventListener('click', submitQuiz);
 
       /* ── Radio: auto-advance after short delay ── */
       document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
@@ -668,8 +698,14 @@
           });
           radio.closest('.option, .scale-option').classList.add('selected');
 
-          /* auto-advance */
-          setTimeout(advance, 380);
+          /* auto-advance (on last step, show submit button instead) */
+          setTimeout(function () {
+            if (current === TOTAL) {
+              btnSubmit.classList.remove('btn--hidden');
+            } else {
+              advance();
+            }
+          }, 380);
         });
       });
 
