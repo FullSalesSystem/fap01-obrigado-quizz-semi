@@ -672,6 +672,12 @@
         var q4 = document.querySelector('input[name="q4"]:checked');
         var q5 = document.querySelector('input[name="q5"]:checked');
 
+        /* collect all URL params */
+        var urlParams = {};
+        new URLSearchParams(window.location.search).forEach(function (value, key) {
+          urlParams[key] = value;
+        });
+
         fetch('https://responsefss.fullsalessystem.com.br/webhook/DESENVRESPS', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -680,7 +686,8 @@
             q2: q2,
             q3: q3 ? q3.value : null,
             q4: q4 ? q4.value : null,
-            q5: q5 ? q5.value : null
+            q5: q5 ? q5.value : null,
+            url_params: urlParams
           })
         }).finally(function () {
           window.location.href = 'https://fap01-calendly-semi.fullsalessystem.com/';
