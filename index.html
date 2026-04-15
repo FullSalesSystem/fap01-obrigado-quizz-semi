@@ -14,20 +14,20 @@
     :root {
       --red:        #FE063B;
       --red-dark:   #c90030;
-      --red-glow:   rgba(254, 6, 59, 0.07);
-      --bg:         #f4f4f7;
-      --card:       #ffffff;
-      --border:     rgba(0, 0, 0, 0.10);
-      --border-red: rgba(254, 6, 59, 0.3);
-      --text:       #111118;
-      --muted:      #55556a;
+      --red-glow:   rgba(254, 6, 59, 0.15);
+      --bg-blue:    #0d1a36;
+      --card:       #0d1a36;
+      --border:     rgba(255, 255, 255, 0.14);
+      --border-red: rgba(254, 6, 59, 0.55);
+      --text:       #ffffff;
+      --muted:      #b8c0d4;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg);
+      background: var(--bg-blue) url('background%20fss.png') center center / cover no-repeat fixed;
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -38,8 +38,7 @@
     /* ─── Navbar ────────────────────────────────────────────── */
     .navbar {
       width: 100%;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
+      background: var(--bg-blue);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -90,11 +89,11 @@
       border: 1px solid var(--border);
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.35);
     }
     .quiz-card__bar {
       height: 4px;
-      background: #ececf2;
+      background: rgba(255,255,255,0.10);
       position: relative;
     }
     .quiz-card__bar-fill {
@@ -170,7 +169,7 @@
       cursor: pointer;
       transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
       user-select: none;
-      background: #fafafc;
+      background: rgba(255,255,255,0.04);
     }
     .option:hover {
       border-color: var(--border-red);
@@ -181,7 +180,7 @@
       appearance: none;
       -webkit-appearance: none;
       width: 18px; height: 18px;
-      border: 2px solid #ccccd8;
+      border: 2px solid rgba(255,255,255,0.35);
       border-radius: 50%;
       flex-shrink: 0;
       transition: border-color 0.18s, background 0.18s;
@@ -217,7 +216,7 @@
     .option.selected {
       border-color: var(--border-red);
       background: var(--red-glow);
-      box-shadow: 0 0 0 3px rgba(254,6,59,0.07);
+      box-shadow: 0 0 0 3px rgba(254,6,59,0.15);
     }
     .option__label {
       font-size: 0.93rem;
@@ -259,7 +258,7 @@
       max-width: 70px;
       border-radius: 12px;
       border: 1.5px solid var(--border);
-      background: #fafafc;
+      background: rgba(255,255,255,0.04);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -273,8 +272,8 @@
     .scale-option input:checked ~ .scale-btn {
       border-color: var(--red);
       background: var(--red-glow);
-      color: var(--red);
-      box-shadow: 0 0 0 3px rgba(254,6,59,0.07);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(254,6,59,0.15);
     }
 
     /* ─── Navigation buttons ────────────────────────────────── */
@@ -317,7 +316,7 @@
       border: 1.5px solid var(--border);
     }
     .btn--ghost:hover {
-      border-color: #aaaabc;
+      border-color: rgba(255,255,255,0.4);
       color: var(--text);
     }
     .btn--hidden { visibility: hidden; pointer-events: none; }
@@ -346,6 +345,7 @@
       font-size: clamp(1.2rem, 3vw, 1.5rem);
       font-weight: 800;
       margin-bottom: 12px;
+      color: var(--text);
     }
     .success__sub {
       font-size: 0.95rem;
@@ -380,11 +380,11 @@
     <div class="navbar__inner">
       <img
         class="navbar__logo"
-        src="LOGO-(Azul)---Full-Sales.png"
+        src="LOGO-(Branco)---Full-Sales.png"
         alt="Full Sales System"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
       />
-      <span style="display:none; font-family:'Sora',sans-serif; font-weight:800; font-size:1.05rem; color:#111118;">
+      <span style="display:none; font-family:'Sora',sans-serif; font-weight:800; font-size:1.05rem; color:#ffffff;">
         Full Sales <span style="color:#FE063B;">System</span>
       </span>
     </div>
