@@ -128,9 +128,13 @@
     }
   });
 
-  var style = document.createElement('style');
-  style.textContent = '@keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-6px)} 40%,80%{transform:translateX(6px)} }';
-  document.head.appendChild(style);
+  var logo = document.querySelector('.navbar__logo');
+  if (logo) {
+    logo.addEventListener('error', function () {
+      logo.style.display = 'none';
+      if (logo.nextElementSibling) logo.nextElementSibling.style.display = 'inline';
+    });
+  }
 
   updateUI();
 })();
