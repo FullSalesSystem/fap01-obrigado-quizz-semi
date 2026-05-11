@@ -68,7 +68,8 @@
         q5: q5 ? q5.value : null
       })
     }).finally(function () {
-      window.location.href = 'https://fap01-calendly-semi.fullsalessystem.com/';
+      var params = window.location.search;
+      window.location.href = 'https://fap01-calendly-semi.fullsalessystem.com/' + (params || '');
     });
   }
 
